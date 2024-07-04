@@ -1,0 +1,67 @@
+.card {
+    background: linear-gradient(90deg, #007991 0%, #418898 100%);
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card__img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card__content {
+    padding: 15px;
+  }
+
+  .card__header {
+    font-size: 1.5em;
+    margin: 0;
+  }
+
+  .card__text-wrapper {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .card__text {
+    margin: 0;
+  }
+
+  h1 {
+    position: relative;
+    font-size: 18px;
+  }
+
+  p {
+    position: relative;
+    margin: 1rem 0 0;
+  }
+
+  p:first-of-type {
+    margin-top: 1.25rem;
+  }
+
+  p:first-of-type:before {
+    content: "";
+    position: absolute;
+    height: 5px;
+    background: #098dae;
+    width: 35px;
+    top: -0.75rem;
+    border-radius: 3px;
+  }
+
+
+  .grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    padding: 20px;
+  }

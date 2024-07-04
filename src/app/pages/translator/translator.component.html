@@ -1,0 +1,99 @@
+<div class="translator">
+  <div class="translator-form">
+    <div class="form-row">
+      <div class="form-group">
+        <select id="fromLanguage" class="form-control" [(ngModel)]="selectedFromLanguage">
+          <option *ngFor="let language of nameLanguages" [value]="language.language">{{ language.language }}</option>
+        </select>
+      </div>
+      <div class="swap-button">
+        <button type="button" (click)="swapLanguages()">⇆</button>
+      </div>
+      <div class="form-group">
+        <select id="toLanguage" class="form-control" [(ngModel)]="selectedToLanguage">
+          <option *ngFor="let language of nameLanguages" [value]="language.language">{{ language.language }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <textarea id="textToTranslate" [(ngModel)]="textToTranslate" (ngModelChange)="translate()"
+          name="textToTranslate" class="form-control" placeholder="Ingresar texto"></textarea>
+      </div>
+
+      <div class="form-group">
+        <textarea id="translatedText" [(ngModel)]="translatedText" name="translatedText" class="form-control" readonly
+          placeholder="Traducción" [value]="textToTranslate ? translatedText : ''"></textarea>
+      </div>
+
+    </div>
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" (click)="translateAndDisplay()" class="btn btn-secondary mr-4">Traducir</button>
+      <button type="button" (click)="saveTranslation()" class="btn btn-primary">Guardar</button>
+    </div>
+  </div>
+
+  <div class="translation-history mt-4">
+    <h2></h2>
+    <mat-slide-toggle [(ngModel)]="showInactive" (ngModelChange)="toggleActiveStatus($event)" class="float-right mt-2">
+      {{ showInactive ? 'Mostrar Inactivos' : 'Mostrar Activos' }}
+    </mat-slide-toggle>
+    <table class="table table-striped table-stylized">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Lenguaje</th>
+          <th>Texto Original</th>
+          <th>Texto Traducido</th>
+          <th>Status</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let translation of translations | paginate: { itemsPerPage: 10, currentPage: page } ">
+          <td>{{ translation.id }}</td>
+          <td>{{ translation.languages }}</td>
+          <td>{{ translation.entered_text }}</td>
+          <td>{{ translation.translated_text }}</td>
+          <td>{{ translation.status }}</td>
+          <td><button (click)="openEditModal(translation)" class="btn btn-primary btn-sm edit-button"><i
+                class="fas fa-pencil-alt"></i></button></td>
+          <td><button (click)="deleteTranslation(translation.id)" class="btn btn-danger btn-sm"><i
+                class="fas fa-trash-alt"></i></button></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pagination-container">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>
+</div>
+
+<ng-template #editTranslationModal let-modal>
+  <div class="modal-content translator-form">
+    <div class="modal-header">
+      <h4 class="modal-title">Editar Traducción</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="editLanguage">Lenguaje</label>
+        <select id="editLanguage" class="form-control" [(ngModel)]="editedTranslation.languages">
+          <option *ngFor="let language of nameLanguages" [value]="language.language">{{ language.language }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="editEnteredText">Texto Original</label>
+        <textarea id="editEnteredText" [(ngModel)]="editedTranslation.entered_text" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary mr-4" (click)="closeEditModal()">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="editTranslation(editedTranslation)">Guardar</button>
+    </div>
+  </div>
+</ng-template>

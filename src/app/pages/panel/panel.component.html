@@ -1,0 +1,132 @@
+<div class="descripcion bg-gray-900 text-white px-4 py-2 mb-4 rounded-md">
+  <p class="font-semibold">Descripción:</p>
+  <p>{{ descripcion }}</p>
+</div>
+
+<div class="descripcion bg-gray-900 text-white px-4 py-2 mb-4 rounded-t-md rounded-r-md rounded-l-md">
+  <p class="font-semibold">Contenido:</p>
+  
+  <div class="grid">
+    <div class="card">
+      <div class="card__content">
+        <h1 class="flex justify-center items-center bg-gradient-to-r from-cyan-900 to-cyan-700 rounded-t-lg text-xs">Objetivos</h1>
+        <p></p>
+        <div class="card__text-wrapper">
+          <ul class="card__text">
+            <li> ☆ El desarrollo de este proyecto está centrado en el análisis de imágenes utilizando una API de Servicio Cognitivo, específicamente Computer Vision.</li>
+            <br>
+            <li> ☆ Las imágenes se procesan mediante una API para extraer información detallada de cada imagen que se almacena y gestiona en una base de datos en PostgreSQL, alojada en la nube</li>
+            <br>
+            <li> ☆ Se tiene el desarrollo de la implementación de un bot conversacional con el servicio de Gemini con diferentes funcionalidades.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card__content">
+        <h1 class="flex justify-center items-center bg-gradient-to-r from-cyan-900 to-cyan-700 rounded-t-lg text-xs">Beneficios</h1>
+        <p></p>
+        <div class="card__text-wrapper">
+          <ul class="card__text">
+            <li> ☆ <strong>Computer Vision:</strong> Permite realizar análisis avanzados y detallados de imágenes.</li>
+            <br>
+            <li> ☆ <strong>Gemini AI:</strong> Permite realizar consultas de varios rubros con respuestas de manera inmediata.</li>
+            <br>
+            <li> ☆ <strong>Base de Datos:</strong> Ofrece escalabilidad y procesamiento de datos, garantizando un alto nivel de disponibilidad y seguridad.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card__content">
+        <h1 class="flex justify-center items-center bg-gradient-to-r from-cyan-900 to-cyan-700 rounded-t-lg text-xs">Características</h1>
+        <div class="card__text-wrapper">
+          <ul class="card__text">
+            <li> ☆ Demostración práctica de las capacidades y aplicaciones.</li>
+            <br>
+            <li> ☆ Ejemplos de uso en análisis y desarrollo.</li>
+            <br>
+            <li> ☆ Dependencia de servicios externos.</li>
+            <br>
+            <li> ☆ Límites de recursos en la nube.</li>
+            <br>
+            <li> ☆ Estrategias para superar desafíos.</li>
+            <br>
+            <li> ☆ Importancia de evaluar limitaciones.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="descripcion bg-gray-900 text-white px-4 py-2 mb-4 rounded-md">
+  <p class="font-semibold">Conclusiones:</p>
+  <p>{{conclusion}}</p>
+</div>
+
+<div class="bg-gray-900 text-white px-4 py-2 mb-4 rounded-md font-semibold">Desarrollado por ...</div>
+<div class="items-center justify-center">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    <div
+      class="bg-gray-900 rounded-lg w-full text-white shadow-lg transform transition-transform flex flex-col justify-between"
+      *ngFor="let integrante of integrantes"
+    >
+      <div
+        class="flex justify-center items-center bg-gradient-to-r from-cyan-900 to-cyan-600 rounded-t-lg"
+      >
+        <img
+          src="{{ integrante.foto }}"
+          alt="{{ integrante.nombre }}"
+          class="w-28 h-28 rounded-full object-cover mt-4 mb-4"
+        />
+      </div>
+
+      <div class="text-left px-8 py-4">
+        <p class="text-xl mb-2 text-center font-medium">
+          {{ integrante.nombre }}
+        </p>
+        <p class="text-lg text-gray-400">Responsable de:</p>
+        <p class="text-gray-300">{{ integrante.encargo }}</p>
+      </div>
+
+      <div class="flex justify-center space-x-4 items-center p-8">
+        <a
+          [href]="integrante.github"
+          target="_blank"
+          class="border-sky-400 bg-opacity-10 border px-4 py-1 text-sky-400 flex items-center bg-sky-400 rounded-lg"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 mr-2"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M12 .296c-6.627 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.111.82-.26.82-.577v-2.02c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.834 2.809 1.304 3.495.997.108-.775.419-1.305.762-1.605-2.665-.305-5.467-1.332-5.467-5.931 0-1.31.469-2.381 1.236-3.221-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.984-.399 3.003-.403 1.018.004 2.047.137 3.006.403 2.29-1.552 3.295-1.23 3.295-1.230.655 1.653.243 2.873.119 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.369.814 1.096.814 2.209v3.285c0 .32.217.694.825.577 4.765-1.588 8.199-6.084 8.199-11.387 0-6.627-5.373-12-12-12z"
+            />
+          </svg>
+          <span>Github</span>
+        </a>
+
+        <a
+          [href]="integrante.linkedin"
+          target="_blank"
+          class="border-sky-400 bg-opacity-10 border px-4 py-1 text-sky-400 flex items-center bg-sky-400 rounded-lg"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 mr-2"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-10h3v10zm-1.5-11.268c-.966 0-1.75-.791-1.75-1.764s.784-1.764 1.75-1.764 1.75.791 1.75 1.764-.784 1.764-1.75 1.764zm13.5 11.268h-3v-5.604c0-1.337-.025-3.063-1.869-3.063-1.87 0-2.157 1.46-2.157 2.967v5.7h-3v-10h2.881v1.367h-.041c.401-.761 1.378-1.563 2.836-1.563 3.031 0 3.591 1.994 3.591 4.586v5.61z"
+            />
+          </svg>
+          <span>Linkedin</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

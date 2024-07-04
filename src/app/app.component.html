@@ -1,0 +1,9 @@
+<div class="flex h-screen-full">
+  <app-sidebar [sidebarOpen]="sidebarOpen"></app-sidebar>
+  <div class="flex flex-col flex-grow overflow-hidden">
+    <app-navbar (toggleSidebar)="toggleSidebar()"></app-navbar>
+    <main class="p-4 flex-grow md:ml-64" [class.ml-0]="!sidebarOpen">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

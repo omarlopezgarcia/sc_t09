@@ -1,0 +1,76 @@
+<h1>Specific Topics with Gemini</h1>
+<div id="topic" class="topic">
+
+    <div class="form-container">
+        <form #insertForm="ngForm" (ngSubmit)="insertQuestion(insertForm)">
+            <div class="form-group">
+                <label for="topic">Topic:</label>
+                <input type="text" id="topic" name="topic" ngModel required>
+            </div>
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <textarea id="question" name="question" ngModel required></textarea>
+            </div>
+            <button class="btn_insert" type="submit" [disabled]="insertForm.invalid || !insertForm.dirty">New
+                Question</button>
+        </form>
+    </div>
+    <br>
+    <div class="searching">
+        <input type="text" [(ngModel)]="searchTerm" (input)="filterTopics()" placeholder="Buscar por tema">
+    </div><br>
+
+    <div class="btn-group">
+        <button class="btn_expand" type="button" (click)="expandAll()">Expand All</button>
+        <button class="btn_collapse" type="button" (click)="collapseAll()">Collapse All</button>
+    </div>
+    <div *ngFor="let topic of filteredTopics; let i = index" class="topic__item">
+        <div class="topic__item-header">
+            <button class="topic__arrow" type="button" [id]="'item' + i" aria-labelledby="'item' + i + '-name'"
+                aria-expanded="false" [attr.aria-controls]="'item' + i + '-ctrld'" aria-haspopup="true"
+                (click)="toggleExpand(i)">
+                <svg class="topic__arrow-icon" viewBox="0 0 24 24" width="24px" height="24px">
+                    <use href="#arrow"></use>
+                </svg>
+            </button>
+            <span [id]="'item' + i + '-name'" class="topic__meta">
+                <a class="topic__topics">Topic: {{ topic.topic }}</a><br>
+                <strong class="topic__title">{{ topic.question }}</strong>
+            </span>
+        </div>
+        <div class="topic__item-body" [id]="'item' + i + '-ctrld'" role="region" [attr.aria-labelledby]="'item' + i"
+            aria-hidden="true">
+            <div class="topic__item-body-content">
+                <p class="topic__item-p">{{ topic.answer }}</p>
+            </div><br>
+            <div class="btn-group">
+                <button class="btn_edit" type="button" (click)="selectQuestion(topic)">Edit</button>
+                <button class="btn_delete" type="button" (click)="deleteQuestion(topic.id)">Delete</button>
+            </div>
+            <div class="form-edit-container">
+                <form *ngIf="selectedQuestion?.id === topic.id" #editForm="ngForm"
+                    (ngSubmit)="editQuestion(editForm.value)">
+                    <div class="form-group">
+                        <label>Topic:</label>
+                        <input type="text" name="topic" [(ngModel)]="selectedQuestion!.topic" required><br>
+                    </div>
+                    <div class="form-group">
+                        <label>Question:</label>
+                        <input type="text" name="question" [(ngModel)]="selectedQuestion!.question" required
+                            style="width: 100%;"><br>
+                    </div>
+                    <div class="btn-group-edit">
+                        <button class="btn_edit" type="submit" [disabled]="editForm.invalid">Edit Question</button>
+                        <button class="btn_cancel" type="button" (click)="cancelEdit()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<svg display="none">
+    <symbol id="arrow">
+        <polyline points="7 10,12 15,17 10" fill="none" stroke="currentcolor" stroke-linecap="round"
+            stroke-linejoin="round" stroke-width="4" />
+    </symbol>
+</svg>
